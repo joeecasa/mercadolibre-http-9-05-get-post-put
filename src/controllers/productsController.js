@@ -1,6 +1,9 @@
 const { privateDecrypt } = require('crypto');
 const fs = require('fs');
 const path = require('path');
+
+
+
 //para estos 3 no se puede usar const ya que mas abajo cuando reescribamos los json hay q volver a declarar las variables
 // y las variables declaradas con const no se pueden modificar
 let productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
@@ -31,14 +34,15 @@ const controller = {
 	store: (req, res) => {
 		let ultimo = products.length -1  
 		let idnuevo = products[ultimo].id + 1
-
+console.log(req.file)
 		let productoForm = {
 			id: idnuevo,
             name: req.body.name,
             price: req.body.price,
             discount: req.body.discount,
 			category : req.body.category,
-			description : req.body.description
+			description : req.body.description,
+			image : req.file.filename
 
         }
 		    // primero : leer que cosas ya habia por que si yo ya tenia usuarios registrados no quiero pisarlos
@@ -61,7 +65,7 @@ const controller = {
 		// un array nuevo con lo que hicimos arriba entonces no hay problema con usar la funcion write
 		fs.writeFileSync(productsFilePath, products)
 
-		res.redirect("/products")
+		res.redirect("/")
 	},
 
 	// Update - Form to edit
@@ -82,3 +86,5 @@ const controller = {
 };
 
 module.exports = controller;
+
+

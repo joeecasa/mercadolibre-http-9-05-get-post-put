@@ -390,5 +390,38 @@
 		"discount": "asd",
 		"category": "visited",
 		"description": "asd"
+	},
+	{
+		"id": 48,
+		"name": "primer producto con imagen",
+		"price": "12123",
+		"discount": "123",
+		"category": "in-sale",
+		"description": "primer prod con img"
+	},
+	{
+		"id": 49,
+		"name": "asd",
+		"price": "asd",
+		"discount": "asd",
+		"category": "",
+		"description": "asd"
+	},
+	{
+		"id": 50,
+		"name": "asd",
+		"price": "asd",
+		"discount": "asd",
+		"category": "",
+		"description": "asd"
+	},
+	{
+		"id": 51,
+		"name": "asd",
+		"price": "asd",
+		"discount": "asd",
+		"category": "",
+		"description": "asd",
+		"image": "img-1652312180818.jpeg"
 	}
 ]
