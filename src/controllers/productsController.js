@@ -28,7 +28,8 @@ const controller = {
 
 	// Create -  Method to store
 	store: (req, res) => {
-		res.render("")
+
+		res.send("producto creado")
 	},
 
 	// Update - Form to edit

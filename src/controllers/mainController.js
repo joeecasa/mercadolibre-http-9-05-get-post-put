@@ -24,6 +24,7 @@ const controller = {
 			inSale: inSale })
 	},
 	search: (req, res) => {
+		
 		let busqueda = []
 		let formu = req.query.keywords
 		products.forEach(product => {
