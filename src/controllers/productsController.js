@@ -13,13 +13,13 @@ const controller = {
 	// Root - Show all products
 	index: (req, res) => {
 
-		res.render("products.ejs", { products: products })
+		res.render("products", { products: products })
 	},
 
 	// Detail - Detail from one product
 	detail: (req, res) => {
 		let product = products.find(product => product.id == req.params.id)
-		res.render("detail.ejs", { product: product })
+		res.render("detail", { product: product })
 	},
 
 	// Create - Form to create
@@ -56,12 +56,12 @@ const controller = {
 		productosNuevo.push(productoForm)
 
 		// ahora ya tenemos el array con los usuarios pero es justamente un array entonces lo pasamos a json de nuevo
-		products = JSON.stringify(productosNuevo)
+		products = JSON.stringify(productosNuevo,null,"\t")
 		// una vez terminado este proceso si lo podemos escribir y siempre reemplaza pero esta creando todo el tiempo
 		// un array nuevo con lo que hicimos arriba entonces no hay problema con usar la funcion write
 		fs.writeFileSync(productsFilePath, products)
 
-		res.redirect("/")
+		res.redirect("/products")
 	},
 
 	// Update - Form to edit
