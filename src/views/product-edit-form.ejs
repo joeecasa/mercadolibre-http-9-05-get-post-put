@@ -10,11 +10,11 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Estás editando: <i>P</i></h2>
+				<h2 class="products-title">Estás editando: <i><%= product.name %> </i></h2>
 			</div>
 		</div>
 		<div class="col-12">
-			<form action="/products/edit/<%=product.id %>?_method=PUT" method="post">
+			<form action="/products/edit/<%=product.id %>?_method=PUT" method="post" enctype="multipart/form-data">
 				<div class="row product-detail">
 					<div class="col-12 col-md-6">
 						<label for="name" class="form-label"><%=product.name %>:</label>
@@ -40,8 +40,16 @@
 						<label for="description" class="form-label">Descipción:</label>
 						<textarea name="description" id="description" class="form-input"><%= product.description %></textarea>
 					</div>
+					<div>
+						<img src="/images/products/<%= product.image %>" alt="foto prod"> 
+					</div>
 					<div class="col-12">
-						<button type="submit" class="buy-now-button">Guardar producto</button>
+						<label for="img" class="form-label">Cargue su nueva imagen de perfil:</label>
+						<div><input type="file" name="img" class="frm-input"></div>
+						
+					</div><br>
+					<div class="col-12">
+						<button name="img"type="submit" class="buy-now-button">Guardar producto</button>
 					</div>
 				</div>
 			</form>

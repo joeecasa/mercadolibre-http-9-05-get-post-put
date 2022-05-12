@@ -3,12 +3,14 @@ const express = require('express');
 const router = express.Router();
 //***********path ****************/
 const path = require('path');
+
 //*********multer ********/
 
 const multer = require("multer")
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../../public/images"))
+        cb(null, path.join(__dirname, "../../public/images/products"))
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname))
@@ -25,7 +27,7 @@ router.get('/', productsController.index);
 
 /*** CREATE ONE PRODUCT ***/
 router.get('/create/', productsController.create);
-router.post('/', upload.single("img"), productsController.store);
+router.post('/', upload.single("img") , productsController.store);
 
 
 /*** GET ONE PRODUCT ***/
@@ -33,7 +35,7 @@ router.get('/detail/:id/', productsController.detail);
 
 /*** EDIT ONE PRODUCT ***/
 router.get('/edit/:id', productsController.edit);
-router.put('/edit/:id', productsController.update);
+router.put('/edit/:id', upload.single("img"),productsController.update);
 
 
 /*** DELETE ONE PRODUCT***/
