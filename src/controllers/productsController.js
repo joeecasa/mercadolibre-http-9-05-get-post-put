@@ -47,6 +47,10 @@ const controller = {
 		let productJSON = fs.readFileSync(productsFilePath, 'utf-8')
 		let ultimo = products.length - 1
 		let idnuevo = products[ultimo].id + 1
+		let image = ""
+		if(req.file){
+			img = req.file.filename
+		}
 
 		let productoForm = {
 			id: idnuevo,
@@ -55,7 +59,9 @@ const controller = {
 			discount: req.body.discount,
 			category: req.body.category,
 			description: req.body.description,
-			image: req.file.filename
+			image: image,
+			otro : req.body.otro,
+			check : req.body.check
 
 		}
 		// primero : leer que cosas ya habia por que si yo ya tenia usuarios registrados no quiero pisarlos
