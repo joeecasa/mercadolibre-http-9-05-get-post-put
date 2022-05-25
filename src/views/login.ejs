@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('partials/head', {title: 'Inicio' }) %>
+
+    <body>
+        <!-- Header -->
+        <%- include('partials/headerNavbar') %>
+            <main>
+
+                <form action="/" method="POST">
+
+                    <div class="form__usuario">
+                        <label for="name">Ingrese su Nombre *</label>
+                        <input type="text" name="name" id="name" value="<%= locals.old && old.name ? old.name : ""%>"
+                            placeholder="Ingrese su nombre" >
+                        <% if (locals.errors && errors.name ) { %>
+
+                            <p class="form-error">
+                                <%= errors.name.msg %>
+                            </p>
+
+                            <% } %>
+                    </div>
+                    <div class="form__usuario">
+                        <label for="color">Seleccione un color</label>
+
+                        <select name="color" id="color" >
+
+                            <option value="rojo">Rojo</option>
+                            <option value="verde">Verde</option>
+                            <option value="amarillo">Amarillo</option>
+                            <option value="gris">Gris</option>
+                            <option value="naranja">Naranja</option>
+
+                        </select>
+                    </div>
+                    <div class="form__usuario">
+                        <label for="email">Ingrese su email *</label>
+                        <input type="email" name="email" id="email"
+                            value="<%= locals.old && old.email ? old.email : ""%>"
+                            placeholder="Introduzca su Correo electronico" >
+                        <% if (locals.errors && errors.email ) { %>
+
+                            <p class="form-error">
+                                <%= errors.email.msg %>
+                            </p>
+
+                            <% } %>
+                    </div>
+                    <div class="form__usuario">
+                        <label for="edad">Ingrese edad *</label>
+                        <input type="text" name="edad" id="edad" value="<%= locals.old && old.name ? old.name : ""%>"
+                            placeholder="Ingrese su edad" >
+                        <% if (locals.errors && errors.edad ) { %>
+
+                            <p class="form-error">
+                                <%= errors.edad.msg %>
+                            </p>
+
+                            <% } %>
+                    </div>
+                    
+
+                    <input type="submit" name="" id="" value="enviar">
+                </form>
+            </main>
+            <%- include('partials/footer') %>
+                <!-- /footer -->
+    </body>
+
+</html>

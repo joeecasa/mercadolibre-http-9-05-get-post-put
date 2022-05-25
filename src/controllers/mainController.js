@@ -1,95 +1,127 @@
 const fs = require('fs');
 const path = require('path');
+const bcryptjs = require("bcryptjs")
+const User = require("../../models/User")
+const { validationResult } = require("express-validator");
+const { is } = require('express/lib/request');
 
-const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
-const { validationResult } = require("express-validator")
-
-const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-const visited = products.filter(function (product) {
-	return product.category == "visited";
-})
-const inSale = products.filter(function (product) {
-	return product.category == "in-sale";
-})
 
 
 
 const controller = {
-	index: (req, res) => {
-		const product = products.filter(item => item.id == req.param.id)
 
-		res.render("index.ejs", {
-			visited: visited,
-			inSale: inSale
-		})
+
+	login: (req, res) => {
+		res.render("login")
 	},
-	search: (req, res) => {
 
-		let busqueda = []
-		let formu = req.query.keywords
-		products.forEach(product => {
-			if (product.name.includes(formu)) {
-				busqueda.push(product)
-			}
 
-		});
-		res.render("results.ejs", { busqueda: busqueda })
-	},
-	createUser: function (req, res) {
-		// let usersFilePath = path.join(__dirname, '../data/users.json');
-		// let users = JSON.parse(fs.readFileSync(usersFilePath,'utf-8')); //de JSON a JS
-		let usersFilePath = path.join(__dirname, '../data/users.json');
-		let users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+	processLogin: (req, res) => {
+
 		const errors = validationResult(req)
-		if (errors.isEmpty()) {
 
-			let ultimoElemento = users.length - 1
-			let idNuevo = users[ultimoElemento].id + 1
-
-			let userForm = {
-				id: idNuevo,
-				NombreYapellido: req.body.Nombre,
-				Usuario: req.body.usuario,
-				Email: req.body.email,
-				FechaNacimiento: req.body.fecha,
-				Domicilio1: req.body.domicilio1,
-				Domicilio2: req.body.domicilio2,
-				Contraseña: req.body.pass,
-				ConfirmarContraseña: req.body.pass2
-			}
-			
-
-			let NewUser = []
-			let UsersJSON = fs.readFileSync(usersFilePath, 'utf-8')
-			if (UsersJSON == "") {
-				NewUser.push(userForm)
-			}
-			else {
-				NewUser = JSON.parse(UsersJSON) //de JSON a JS
-				NewUser.push(userForm)
-			}
-
-			fs.writeFileSync(usersFilePath, JSON.stringify(NewUser, null, "\t")) //de JS a JSON
-
-			res.redirect("/products")
-			
-		} 
-		else{
-
-			res.render("registro",{errors : errors.array(),
-			old : req.body})
-			console.log(errors.array())
-			//console.log(req.body)
+		if (!errors.isEmpty()) {
+			res.render("login", { errors: errors.mapped(), old: req.body })
+		} else {
+			res.send(`"hola" + ${req.body.name}, elegiste el color : ${req.body.color}, tu email es : ${req.body.email}`)
 		}
 
+	},
+	login2: (req, res) => {
+		res.render("login2")
+	},
+
+
+	processLogin2: (req, res) => {
+		const errors = validationResult(req)
+		let userToLogin = User.findByField("email", req.body.email)
+		if (userToLogin) {
+			let isOkpassword = bcryptjs.compareSync(req.body.password, userToLogin.password)
+			if (isOkpassword) {
+				req.session.userLogged = userToLogin
+				if(req.body.recordame){
+					res.cookie("userEmail", req.body.email, {maxAge : (1000 * 60)*2})
+				}
+				return res.redirect("/profile")
+			} 
+			res.render("login2", {
+				errors: {
+					email: {
+						msg: "la credenciales son invalidas"
+					}
+				}
+			})
+		}
+
+		res.render("login2", {
+			errors: {
+				email: {
+					msg: " No se encuentra ese email en nuestra base de datos"
+				}
+			}
+		})
 
 	},
-	register: (req, res) => { res.render("registro", { title: "Registro" }) }
+	createUser: function (req, res) {
+		const errors = validationResult(req)
+
+		if (errors.errors.length > 0) {
+			return res.render("registro", {
+				errors: errors.mapped(),
+				old: req.body
+			})
+		}
+		let userInDb = User.findByField("email", req.body.email)
+
+		if (userInDb) {
+			return res.render("registro", {
+				errors: {
+					email: {
+						msg: " este email ya esta registrado"
+					}
+				},
+				old: req.body
+			})
+		}
+
+		let userToCreate = {
+			...req.body,
+			avatar: req.file.filename,
+			password: bcryptjs.hashSync(req.body.password, 10)
+		}
+
+		let userCreated = User.create(userToCreate)
+
+		return res.redirect("/login2")
 
 
-};
+	},
+	register: (req, res) => {
+		
+		res.render("registro", { title: "Registro" }) },
+	
+	profile :  (req, res) => { 
+		
+		
+		res.render("profile",{
+		user : req.session.userLogged
+	}) },
+	logout : (req, res) => { 
+		res.clearCookie("userEmail")
+		req.session.destroy() 
+	return res.redirect("/login2")
+	},
+
+
+
+
+
+
+}
+
+
+
+
 
 module.exports = controller;

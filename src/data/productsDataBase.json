@@ -10,12 +10,12 @@
 	},
 	{
 		"id": 4,
-		"name": "joel",
-		"description": "joel",
-		"price": "joel",
-		"discount": "joel",
-		"image": "img-1652359221700.jpeg",
-		"category": "in-sale"
+		"name": "111111",
+		"description": "joel11111",
+		"price": "11111111",
+		"discount": "1111111",
+		"image": "img-1653067997953.jpeg",
+		"category": ""
 	},
 	{
 		"id": 5,
@@ -73,21 +73,21 @@
 	},
 	{
 		"id": 12,
-		"name": "Home Theatre Sony Bdv-e4100",
+		"name": "probandoooooo",
 		"description": "El sonido Surround de 5.1 canales y 1000 W proporciona un audio de verdadero impacto en los efectos especiales de películas y efectos de sonido de música y deportes. Con la tecnología Near Field Communication(NFC) podés disfrutar de Sonido One- Touch para reproducir música de forma instantánea",
-		"price": 32990,
-		"discount": 0,
-		"image": "img-home-theater-sony.jpg",
+		"price": "asdasd",
+		"discount": "asdasd",
+		"image": "img-1653015495105.jpeg",
 		"category": "visited"
 	},
 	{
 		"id": 13,
-		"name": "Smart TV Samsung 4K 50",
+		"name": "a",
 		"description": "Con el Smart TV Samsung UN50MU6100, viví una nueva experiencia visual con la resolución 4K, que te presentará imágenes con gran detalle y de alta calidad. Ahora todo lo que veas cobrará vida con brillo y colores más reales. Gracias a su tamaño de 50\", podrás transformar tu espacio en una sala de cine y transportarte a donde quieras.",
-		"price": 34990,
-		"discount": 0,
-		"image": "img-tv-samsung-smart.jpg",
-		"category": "visited"
+		"price": "a",
+		"discount": "a",
+		"image": "img-1653067958839.jpeg",
+		"category": "in-sale"
 	},
 	{
 		"id": 14,
@@ -314,5 +314,23 @@
 		"Domicilio2": "qqqqqqqqqq",
 		"Contraseña": "qqqqqqqqq",
 		"ConfirmarContraseña": "qqqqqqqq"
+	},
+	{
+		"id": 41,
+		"name": "joel",
+		"price": "6000",
+		"discount": "30%",
+		"category": "in-sale",
+		"description": "joel",
+		"image": "img-1653143528230.jpeg"
+	},
+	{
+		"id": 42,
+		"name": "felipe tomas casa",
+		"price": "a",
+		"discount": "a",
+		"category": "in-sale",
+		"description": "aaa",
+		"image": "img-1653143413721.jpeg"
 	}
 ]

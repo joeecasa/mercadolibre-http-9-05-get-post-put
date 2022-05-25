@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('partials/head', {title: 'Inicio' }) %>
+
+    <body>
+        <!-- Header -->
+        <%- include('partials/headerNavbar') %>
+            <main>
+
+                <form action="/login2" method="POST">
+
+                    <div class="form__usuario">
+                        <label for="email">Ingrese su email *</label>
+                        <input type="email" name="email" id="email"
+                            value="<%= locals.old && old.email ? old.email : ""%>"
+                            placeholder="Introduzca su Correo electronico" >
+                        <% if (locals.errors && errors.email ) { %>
+
+                            <p class="form-error">
+                                <%= errors.email.msg %>
+                            </p>
+
+                            <% } %>
+                    </div>
+                   
+                    <div class="form__usuario">
+                        <label for="password">Ingrese password</label>
+                        <input type="password" name="password" id="password" value="<%= locals.old && old.name ? old.name : ""%>"
+                            placeholder="Ingrese su password" >
+                        <% if (locals.errors && errors.password ) { %>
+
+                            <p class="form-error">
+                                <%= errors.password.msg %>
+                            </p>
+
+                            <% } %>
+                    </div>
+                    <div>
+                        <label for="recordame">recordame</label>
+
+                        <input type="checkbox" name="recordame" id="">
+                    </div>
+
+                    <input type="submit" name="" id="" value="enviar">
+                </form>
+            </main>
+            <%- include('partials/footer') %>
+                <!-- /footer -->
+    </body>
+
+</html>
