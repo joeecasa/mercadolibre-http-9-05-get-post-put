@@ -6,157 +6,120 @@
         <%- include('partials/headerNavbar') %>
             <!-- /Header -->
             <main class="main-register">
+                <form action="/register" method="POST" class="form-Reg" enctype="multipart/form-data">
 
+                    <div class="form__nombre">
+                        <label for="nombre">Nombre y Apellido *</label>
+                        <input type="text" name="nombre" placeholder=" Introduzca su Nombre y apellido"
+                            value="<%= locals.old && old.nombre ? old.nombre : ""%>" class="hola is-invalid">
+                        <% if (locals.errors && errors.nombre) { %>
+                            <p class="form-error">
+                                <%= errors.nombre.msg %></p>
+                            <% } %>
+                    </div>
+                    <div class="form__usuario">
+                        <label for="usuario">Nombre de usuari@ *</label>
+                        <input type="text" name="usuario" id="usuario"
+                            value="<%= locals.old && old.usuario ? old.usuario : ""%>"
+                            placeholder="Introduzca su Nombre de usuari@">
+                        <% if (locals.errors && errors.usuario ) { %>
+                           
+                                    <p class="form-error">
+                                        <%= errors.usuario.msg %>
+                                    </p>
+                                            <% } %>
+                    </div>
+                    <div class="form__usuario">
+                        <label for="email">Correo electronico *</label>
+                        <input type="email" name="email" id="email"
+                            value="<%= locals.old && old.email ? old.email : ""%>"
+                            placeholder="Introduzca su Correo electronico">
+                        <% if (locals.errors && errors.email ) { %>
+                            
+                                    <p class="form-error">
+                                        <%= errors.email.msg %>
+                                    </p>
+                                    
+                                            <% } %>
+                    </div>
+                    <div class="form__fecha">
+                        <label for="fecha">Fecha de nacimiento</label>
+                        <input value="<%= locals.old && old.fecha ? old.fecha : ""%>" type="date" name="fecha"
+                            id="fecha" value="fecha">
+                        <% if (locals.errors && errors.fecha ) { %>
+                            
+                                    <p class="form-error">
+                                        <%= errors.fecha.msg %>
+                                    </p>
+                                    
+                                            <% } %>
+                    </div>
+                    <div class="form__domicilio">
+                        <label for="img">foto de perfil</label><br>
+                        <input type="file" name="img" i placeholder="foto de perfil">
+                        <% if (locals.errors && errors.img ) { %>
+                            
+                                    <p class="form-error">
+                                        <%= errors.img.msg %>
+                                    </p>
+                                    
+                                            <% } %>
+                    </div>
 
+                    <div class="form__domicilio">
+                        <label for="domicilio">Domicilio de envio 1 *</label><br>
+                        <input type="text" name="domicilio1" id="domicilio"
+                            value="<%= locals.old && old.domicilio1 ? old.domicilio1 : ""%>"
+                            placeholder=" Introduzca su Domicilio">
+                        <% if (locals.errors && errors.domicilio1 ) { %>
+                            
+                                    <p class="form-error">
+                                        <%= errors.domicilio1.msg %>
+                                    </p>
+                                    
+                                            <% } %>
+                    </div>
+                    <div class="form__domicilio">
+                        <label for="domicilio">Domicilio de envio 2 </label><br>
+                        <input type="text" name="domicilio2" id="domicilio"
+                            value="<%= locals.old && old.domicilio2 ? old.domicilio2 : ""%>"
+                            placeholder=" Introduzca su Domicilio">
+                            <% if (locals.errors && errors.domicilio2 ) { %>
+                            
+                                <p class="form-error">
+                                    <%= errors.domicilio2.msg %>
+                                </p>
+                                
+                                        <% } %>
+                    </div>
 
-                                <form action="/register" method="POST" class="form-Reg" enctype="multipart/form-data">
+                    <div class="form__password">
+                        <label class="form__password__title" for="pass">Contraseña *</label><br>
+                        <input type="password" name="pass" id="pass" placeholder="Introduzca su contraseña">
+                        <% if (locals.errors && errors.pass ) { %>
+                            
+                            <p class="form-error">
+                                <%= errors.pass.msg %>
+                            </p>
+                            
+                                    <% } %>
+                    </div>
+                    <div class="form__confirm">
+                        <label class="form__confirm__title" for="pass">Confirmar contraseña *</label>
+                        <input type="password" name="pass2" id="pass" placeholder="Introduzca su contraseña nuevamente">
+                        <<% if (locals.errors && errors.pass2 ) { %>
+                            
+                            <p class="form-error">
+                                <%= errors.pass2.msg %>
+                            </p>
+                            
+                                    <% } %>
+                    </div>
+                    <div class="contenedor_button">
+                        <button class="form__button" type="submit">Borrar</button>
+                        <button class="form__button" type="submit">Enviar</button>
 
-                                    <div class="form__nombre">
-                                        <label for="nombre">Nombre y Apellido *</label>
-                                        <input type="text" name="nombre" placeholder=" Introduzca su Nombre y apellido"
-                                            value="<%= locals.old && old.nombre ? old.nombre : ""%>" class="hola is-invalid">
-                                        <% if (locals.errors ) { %>
-                                            <% errors.find(error=> { %>
-                                                <% if (error.param ==="nombre" ) { %>
-                                                    <p class="form-error">
-                                                        <%= error.msg %>
-                                                    </p>
-                                                    <% } %>
-
-                                                        <% }) %>
-                                                            <% } %>
-                                    </div>
-                                    <div class="form__usuario">
-                                        <label for="usuario">Nombre de usuari@ *</label>
-                                        <input type="text" name="usuario" id="usuario"
-                                            value="<%= locals.old && old.usuario ? old.usuario : ""%>"
-                                            placeholder="Introduzca su Nombre de usuari@">
-                                        <% if (locals.errors ) { %>
-                                            <% errors.find(error=> { %>
-                                                <% if (error.param==="usuario" ) { %>
-                                                    <p class="form-error">
-                                                        <%= error.msg %>
-                                                    </p>
-                                                    <% } %>
-
-                                                        <% }) %>
-                                                            <% } %>
-                                    </div>
-                                    <div class="form__usuario">
-                                        <label for="email">Correo electronico *</label>
-                                        <input type="email" name="email" id="email"
-                                            value="<%= locals.old && old.email ? old.email : ""%>"
-                                            placeholder="Introduzca su Correo electronico">
-                                        <% if (locals.errors ) { %>
-                                            <% errors.find(error=> { %>
-                                                <% if (error.param==="email" ) { %>
-                                                    <p class="form-error">
-                                                        <%= error.msg %>
-                                                    </p>
-                                                    <% } %>
-
-                                                        <% }) %>
-                                                            <% } %>
-                                    </div>
-                                    <div class="form__fecha">
-                                        <label for="fecha">Fecha de nacimiento</label>
-                                        <input value="<%= locals.old && old.fecha ? old.fecha : ""%>" type="date"
-                                            name="fecha" id="fecha" value="fecha">
-                                        <% if (locals.errors ) { %>
-                                            <% errors.find(error=> { %>
-                                                <% if (error.param==="fecha" ) { %>
-                                                    <p class="form-error">
-                                                        <%= error.msg %>
-                                                    </p>
-                                                    <% } %>
-
-                                                        <% }) %>
-                                                            <% } %>
-                                    </div>
-                                    <div class="form__domicilio">
-                                        <label for="img">foto de perfil</label><br>
-                                        <input type="file" name="img" i placeholder="foto de perfil">
-                                        <% if (locals.errors ) { %>
-                                            <% errors.find(error=> { %>
-                                                <% if (error.param==="img" ) { %>
-                                                    <p class="form-error">
-                                                        <%= error.msg %>
-                                                    </p>
-                                                    <% } %>
-
-                                                        <% }) %>
-                                                            <% } %>
-                                    </div>
-
-                                    <div class="form__domicilio">
-                                        <label for="domicilio">Domicilio de envio 1 *</label><br>
-                                        <input type="text" name="domicilio1" id="domicilio"
-                                            value="<%= locals.old && old.domicilio1 ? old.domicilio1 : ""%>"
-                                            placeholder=" Introduzca su Domicilio">
-                                        <% if (locals.errors ) { %>
-                                            <% errors.find(error=> { %>
-                                                <% if (error.param==="domicilio1" ) { %>
-                                                    <p class="form-error">
-                                                        <%= error.msg %>
-                                                    </p>
-                                                    <% } %>
-
-                                                        <% }) %>
-                                                            <% } %>
-                                    </div>
-                                    <div class="form__domicilio">
-                                        <label for="domicilio">Domicilio de envio 2 </label><br>
-                                        <input type="text" name="domicilio2" id="domicilio"
-                                            value="<%= locals.old && old.domicilio2 ? old.domicilio2 : ""%>"
-                                            placeholder=" Introduzca su Domicilio">
-                                        <% if (locals.errors ) { %>
-                                            <% errors.find(error=> { %>
-                                                <% if (error.param==="domicilio2" ) { %>
-                                                    <p class="form-error">
-                                                        <%= error.msg %>
-                                                    </p>
-                                                    <% } %>
-
-                                                        <% }) %>
-                                                            <% } %>
-                                    </div>
-
-                                    <div class="form__password">
-                                        <label class="form__password__title" for="pass">Contraseña *</label><br>
-                                        <input type="password" name="pass" id="pass"
-                                           
-                                            placeholder="Introduzca su contraseña">
-                                        <% if (locals.errors ) { %>
-                                            <% errors.find(error=> { %>
-                                                <% if (error.param==="pass" ) { %>
-                                                    <p class="form-error">
-                                                        <%= error.msg %>
-                                                    </p>
-                                                    <% } %>
-
-                                                        <% }) %>
-                                                            <% } %>
-                                    </div>
-                                    <div class="form__confirm">
-                                        <label class="form__confirm__title" for="pass">Confirmar contraseña *</label>
-                                        <input type="password" name="pass2" id="pass"
-                                            placeholder="Introduzca su contraseña nuevamente">
-                                        <% if (locals.errors ) { %>
-                                            <% errors.find(error=> { %>
-                                                <% if (error.param==="pass2" ) { %>
-                                                    <p class="form-error">
-                                                        <%= error.msg %>
-                                                    </p>
-                                                    <% } %>
-
-                                                        <% }) %>
-                                                            <% } %>
-                                    </div>
-                                    <div class="contenedor_button">
-                                        <button class="form__button" type="submit">Borrar</button>
-                                        <button class="form__button" type="submit">Enviar</button>
-
-                                    </div>
+                    </div>
 
 
 
@@ -164,11 +127,11 @@
 
 
 
-                                </form>
+                </form>
 
-                                <div class="help-button">
-                                    <button><i class="fa-solid fa-circle-question"></i> Ayuda</button>
-                                </div>
+                <div class="help-button">
+                    <button><i class="fa-solid fa-circle-question"></i> Ayuda</button>
+                </div>
 
             </main>
 
