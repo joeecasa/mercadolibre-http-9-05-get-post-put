@@ -27,9 +27,7 @@ const controller = {
 	detail: (req, res) => {
 		let productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 		let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-
 		let productJSON = fs.readFileSync(productsFilePath, 'utf-8')
-
 		let product = products.find(product => product.id == req.params.id)
 		res.render("detail", { product: product })
 	},
@@ -47,12 +45,10 @@ const controller = {
 		let productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 		let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 		let productJSON = fs.readFileSync(productsFilePath, 'utf-8')
-
 		let ultimo = products.length - 1
 		let idnuevo = products[ultimo].id + 1
 		let image = ""
-		
-		if (req.file) {
+		if(req.file){
 			img = req.file.filename
 		}
 
@@ -64,8 +60,8 @@ const controller = {
 			category: req.body.category,
 			description: req.body.description,
 			image: image,
-			otro: req.body.otro,
-			check: req.body.check
+			otro : req.body.otro,
+			check : req.body.check
 
 		}
 		// primero : leer que cosas ya habia por que si yo ya tenia usuarios registrados no quiero pisarlos
